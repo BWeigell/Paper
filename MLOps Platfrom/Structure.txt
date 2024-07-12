@@ -1,0 +1,60 @@
+# Paper Structure
+
+
+## Abstract
+
+- goal of each company is to be competitive
+- nowadays this includes the development of ML applications
+- for the successful and efficient development of ML applications different components must be orchestrated / combined such as Data Storage, computing resources, data and training pipelines
+- however challenging to provide developers / employees in a company all the required capabilities and components in a concise manner for the development of ML applications and therefore ML adaption is only slowly increasing
+- To overcome these challenges we performed a Multivocal Literature Review to extract general requirements for building ML applications from formal and informal literature. Based on the requirements we propose a holistic machine learning platform design with MLOps capabilities and a tailored lifecycle for the development of ML applications
+- As a results we demonstrate an implementation of the machine learning platform and the realization of the MNIST use-case utilizing the machine learning platform and the proposed workflow
+- Finally, this work enables companies or research groups to develop their ML applications more easily
+
+# Structure
+
+**Introduction:**
+	- adaption of ML in industry is increasing
+	- problems in adaption
+		- IT infrastructure
+			- data storage
+			- model storage
+			- gpu access
+			- collaboration
+		- from research to production (MLOps)
+	- enable smaller groups to perform ML adaption develop machine learning application propose platform architecture and lifecycle to 
+
+**Methods:** [[Methods]]
+- goal build holistic machine learning platform with MLOps capabilities
+- strategy to identify general ML platform capabilities and MLOps capabilities 
+
+- two folded:
+- general platform requirements: 
+	- analysis of the AI infrastructure of the four big players (Alibaba, Amazon, Google, Microsoft)
+- identification of MLOps capabilities via a MLR
+	- how is the MLR performed
+	- resulting MLOps principles
+
+
+**ML Platform and MLOps Capabilities**
+
+**Concept:**
+	- Platform Design [[Platform Design]]
+	- Lifecycle
+ 
+ **Results:**
+	 - Implementation
+
+ **Evaluation:**
+	- Use-Case: MNIST
+	- Comparison with other solutions
+
+**Discussion:**
+	- enabler für menschen aber es gehört auf umsetzung dazu
+	- szenairen → Skalierbarkeit, weiter Use-Cases, Flexibilität
+	- Sicherheit
+	- Open-Source → Wartbarkeit, Unterstzüzung in 3 jahren 
+	- trusthwory 
+
+**Conclusion**
+

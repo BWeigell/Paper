@@ -1,0 +1,509 @@
+# Methods
+
+Designing a holistic ML platform with MLOps capabilities requires identifying both general infrastructure capabilities and MLOps capabilities. To determine the general infrastructure capabilities, we analyzed the ML infrastructure architecture of major Cloud Platform providers. For the MLOps capabilities, we conducted a Multivocal Literature Review (MLR) based on  @Garousi.2019 to consider both grey and formal literature, as MLOps is a new emerging software engineering development paradigm. Both analyses are detailed in the following two sections. 
+
+
+
+## Requirement Extraction
+MLOps is a new emerging software engineering development paradigm consisting of a set of best practices and principles that ensure the successful transition of ML artifacts from development to production @Kreuzberger.2023. These best practices and principles are tailored to overcome the challenges arising throughout the ML lifecycle. Hence, a platform fulfilling MLOps best practices and principles inherently supports the development, deployment, and maintenance of ML applications. Consequently, the requirements for the proposed ML platform are defined by and extracted from MLOps' best practices and principles. These MLOps best practices and principles were determined from formal and grey literature by conducting a Multivocal Literature Review (MLR) based on @Garousi.2019.
+
+The MLR was guided by the following research question (RQ):
+
+/ RQ-0: What are published MLOps best practices and principles?
+
+The search term ((("DevOps" OR "CICD" OR "Continuous Integration" OR "Continuous Delivery" OR "Continuous Deployment" OR "Continuous Learning") AND "Machine Learning") OR "MLOps" OR "CD4ML") was established to identify the corresponding grey and formal literature. The search was conducted in October 2023 using Google Scholar for formal literature and Google for grey literature, based on the assertion by @Yasin.2020 that combining results from Google Scholar and grey literature from Google yields a range of sources comparable to those obtained through searches in other databases like ACM Digital Library, IEEE, and ScienceDirect. As stopping criteria, the effort bound was set to the first 100 entries in Google Scholar for the formal literature and the first 40 entries from Google for the grey literature.
+
+Relevant sources were selected from the identified sources based on the following three groups of defined inclusion criteria:
+
+
+- General inclusion criteria: These must be fulfilled by both formal and grey literature.
+- Formal inclusion criteria: These apply only to formal literature.
+- Informal inclusion criteria: These are relevant only to grey literature.
+
+The details of all inclusion criteria are listed in Tables X, Y, and Z, respectively. Nine articles were selected from the formal group, and five web pages were chosen from the grey literature group based on the established inclusion criteria.
+
+
+## Resulting MLOps Principles
+Based on the MLR, the following groups of principles were identified: Continuous-X, Cross-Functional Development, Orchestration and Automation, and Traceability and Reproducibility. Notably, we could revalidate all principles defined by @Kreuzberger.2023 except for feedback loops. However, we refined CI/CD automation by dividing it into the separate principles of CI, CD, continuous deployment, and general automation. These individual principles were placed in the Continuous-X or Orchestration and Automation groups, according to @Visengeriyeva. Furthermore, we introduced a new principle, user friendliness, to increase the adaption of an MLOps platform. We also consolidated versioning and metadata capture with reproducibility under a new group, Traceability and Reproducibility, to focus more on traceability aspects. 
+
+##### Continuous-X
+
+Continuous activities such as Continuous Integration (CI), Continuous Delivery (CD), and Continuous Deployment emerged as DevOps practices @Fitzgerald.2017. These practices have also been transferred to the ML domain and complemented with two ML-specific principles: Continuous Training (CT) and Continuous Monitoring (CM). To be open to emerging ML-specific continuous activities, we have chosen the term "Continuous-X" for this group, where "X" serves as a placeholder for existing and potential new continuous practices, following @Visengeriyeva naming.
+
+**Continuous Integration (CI)**
+Continuous Integration (CI), a core principle of DevOps, is adapted by MLOps @Kreuzberger.2023, @Bagai.2024, @Karamitsos.2020, @Zhou.2020, @Wang.2020, @Ruf.2021, @Subramanya.2022. CI encourages team members to regularly merge code changes into a shared repository, followed by tests to detect issues early @Shahin.2017, @Fitzgerald.2017. Therefore, this process improves communication, developer productivity, and release frequency and predictability @Ståhl.2013. In the case of MLOps, CI also includes steps specific to the ML domain, such as data validation @Zhou.2020, @GoogleCloud, @John.2021 and testing model convergence @Subramanya.2022.
+
+**Continuous Delivery (CD)**
+Continuous Delivery (CD) builds upon CI by adding automated tests and quality checks to ensure the software is ready for deployment to a production environment @Fitzgerald.2017, @Shahin.2017. After passing the checks and manual acceptance from the deployment team, the CD pipeline automatically deploys the software artifact to the production environment @Fitzgerald.2017, @Shahin.2017. In MLOps, CD practices are commonly employed to deploy the entire ML pipeline @GoogleCloud, @Lwakatare.2020, @Karamitsos.2020, @Garg.2021 and to integrate the trained models into the overall software architecture @Karamitsos.2020, @Zhou.2020, @GoogleCloud, @Garg.2021, @Testi.2022, reducing deployment time and increasing reliability @Testi.2022.
+
+
+**Continuous Deployment**
+Continuous Deployment is a modification of the CD process by removing the manual acceptance step from the deployment pipeline, thereby fully automating deployment process @Fitzgerald.2017, @Shahin.2017. Hence, every code change that passes the CI stage and the additional quality checks is automatically deployed to the production environment, enabling frequent and automated releases @Shahin.2017. In MLOps, Continuous Deployment is used to integrate new insights such as new data or algorithms rapidly @Bagai.2024, and to obtain immediate feedback from the production environment @Kreuzberger.2023.
+
+**Continuous Training (CT)**
+Continuous Training (CT) is a new continuous deployment paradigm in MLOps that aims to keep models up-to-date with the latest data  @John.2021, @Kreuzberger.2023, @Ruf.2021, @Steidl.2023, @Subramanya.2022, @Testi.2022, @Visengeriyeva, @GoogleCloud. In CT, the deployed ML pipeline is re-executed if new data becomes available and a specified execution condition, referred to as trigger, is met. Such execution conditions could include detected model performance degradation due to concept or data drift @Ruf.2021, @John.2021, @Testi.2022, a periodic timer @Testi.2022, or the general availability of new data @John.2021, @Subramanya.2022, @GoogleCloud, @Visengeriyeva. 
+
+**Continuous Monitoring (CM)**
+In order to achieve CT, Continuous Monitoring (CM) is required to provide the necessary triggers for re-execution of the ML pipeline @Karamitsos.2020, @Subramanya.2022, @Steidl.2023, @Kolltveit.2022, @Testi.2022, @Warnett.2022, @Ruf.2021, @GoogleCloud, @Visengeriyeva. CM considers the three key aspects of system, data, and model monitoring @Bagai.2024, @Steidl.2023, @Kolltveit.2022, @Testi.2022, @Ruf.2021. 
+
+System monitoring addresses issues like resource utilization,  @Karamitsos.2020, @Singla.2023, @Ruf.2021 @Kolltveit.2022, @Steidl.2023, inference latency @Bagai.2024, @Steidl.2023, @Kolltveit.2022, @Ruf.2021, and user feedback @Liang.2024. 
+
+Data monitoring involves detecting various data-related issues, including data drift and changes in data quality @Subramanya.2022, @Bagai.2024, @Steidl.2023, @Symeonidis.2022, @Ruf.2021. 
+
+Finally, model monitoring focuses primarily on model performance in the form of prediction accuracy or other metrics relating to the model performance, like output distribution @Karamitsos.2020, @Singla.2023, @Subramanya.2022, @Bagai.2024, @Steidl.2023, @Liang.2024, @Kolltveit.2022, @Symeonidis.2022, @Testi.2022, @Warnett.2022, @Ruf.2021.
+
+By continuously monitoring these aspects, CM can timely detect various issues affecting the entire ML system's performance, thereby providing triggers for the CT process and insights for problem resolution.
+
+
+#### Cross-Functional Development 
+
+In ML projects different stakeholders are involved in the development such as data scientists, software engineers, and product owners @Ruf.2021, @Kreuzberger.2023. The principles Collaboration and User Friendliness aim to facilitate the development process between the stakeholders. 
+
+**Collaboration**
+Collaboration ensures that all involved stakeholders can work together without knowledge silos @John.2021, @Kreuzberger.2023, @Karamitsos.2020, @Lwakatare.20202k,  @Ruf.2021, @Singla.2023, @Wang.2020, @Fowler.2019, @Ramalingam.2023, @Visengeriyeva. However, collaboration in ML projects is more challenging as it requires cooperation not only on code but also on data and artifacts like models @Mäkinen.2021, @Ruf.2021.
+
+**User Friendliness**
+Given the collaboration between technical and non-technical team members, the tools and platforms used should be user-friendly @Ruf.2021.
+
+
+#### Orchestration and Automation:
+
+ML Pipeline Orchestration and Automation are interrelated concepts in MLOps. ML Pipeline Orchestration structures and executes the stages within the ML pipeline. In contrast, Automation addresses the degree of automatization across the entire MLOps workflow, from ML pipeline deployment to final model integration. 
+
+**ML Pipeline Orchestration**
+The typical ML pipeline involves several stages: data extraction, data validation, data preparation, model training, model evaluation and model validation @GoogleCloud, @Kreuzberger.2023, @Fowler.2019, @Symeonidis.2022. ML Pipeline Orchestration structures and executes these stages while considering the dependencies between them @Lwakatare.20202k, @Fowler.2019, @Kreuzberger.2023, @GoogleCloud.
+
+**Automation**
+Automation characterizes the maturity of the MLOps workflow and specifies its ability to autonomously deploy the ML pipeline, re-execute the ML pipeline based on new data and serve the final model @Wang.2020, @Lwakatare.20202k, @John.2021, @Garg.2021, @GoogleCloud. In the literature, several maturity models exist that describe the level of automation in MLOps with varying degrees of granularity. Commonly, these models start with a manual, script-based approach and result in a fully automated process that enables continuous training and automatic ML pipeline deployment based on new ideas such as customized model architecture and parameters @GoogleCloud, @Lwakatare.20202k, @John.2021, @Garg.2021.
+
+#### Traceability and Reproducibility
+Seven key requirements must be fulfilled to build trustworthy AI systems @EuropeanCommission.2019. One of these requirements is transparency, which depends on the concept of traceability. Traceability involves documenting data, processes, and decisions, enabling transparency, auditability, explainability, error identification, and prevention @EuropeanCommission.2019. MLOps includes versioning and metadata tracking principles, thus directly improving traceability @Kreuzberger.2023, @Zhou.2020 (@Bagai.2024, @John.2021, @Karamitsos.2020, @Liang.2024, @Warnett.2022). Moreover, traceability is an enabler for reproducible ML experiments. 
+
+**Versioning**
+In MLOps versioning affects code, data and model artifacts @Bagai.2024, @John.2021, @Karamitsos.2020, @Kreuzberger.2023, @Ruf.2021, @Steidl.2023, @Testi.2022, @Wang.2020, @Zhou.2020, @Fowler.2019, @Ramalingam.2023, @Visengeriyeva. However, versioning should also consider the runtime environment, such as docker containers. 
+
+**Metadata Capture**
+Metadata capture is necessary, on the one hand, to link the used dataset, code, and runtime environment with the resulting model to create a full model lineage and, on the other hand, to enable comparisons and examination of different results @Liang.2024, @Lwakatare.20202k, @Steidl.2023, @Subramanya.2022, @Kreuzberger.2023, @GoogleCloud. Three metadata categories can be identified. Model metadata considers aspects specific to the model, such as hyperparameters, evaluation results, and inference latency @Bagai.2024, @John.2021, @Liang.2024, @Subramanya.2022, @Testi.2022. Dependency metadata connects the data version, code version, and runtime environment with the produced model @Warnett.2022, @Kreuzberger.2023, @Steidl.2023. Finally, pipeline metadata captures information about the executed pipeline, such as triggers, completion time, and pipeline versions @GoogleCloud, @Kreuzberger.2023, @Lwakatare.20202k, @Subramanya.2022.
+
+**Reproducibility**
+According to the Association for Computing Machinery (ACM), reproducibility in computational experiments such as machine learning allows an independent group to replicate the results utilizing the developer's original artifacts. MLOps requires reproducibility as it must be possible to recreate the models produced during experimentation in a different environment, such as the production environment @Singla.2023, @Testi.2022, @Fowler.2019. Additionally, reproducibility is supported through versioning the code, model, and data and tracking corresponding metadata.
+
+
+
+
+# References per Principle
+**Continuous Training (CT)**
+- automated retraining of model and deploy new model in case new data is available @Ruf.2021
+- what is the trigger?
+    - new data @John.2021, @Kreuzberger.2023, @Ruf.2021, @Steidl.2023, @Subramanya.2022, @Testi.2022
+    - data drift @Ruf.2021 (@Singla.2023), @Steidl.2023
+    - concept drift @Ruf.2021 @Steidl.2023
+    - model drift @Steidl.2023
+    - model performance degradation @John.2021, @Testi.2022
+    - periodic, scheduled trigger @Steidl.2023, @Testi.2022
+    - repository updates @Steidl.2023, @Zhou.2020 -> algorithm changes
+    - hardware / infrastructure change @Steidl.2023
+    - human trigger on demand @Steidl.2023, @Testi.2022
+    (- retrain model when needed @Symeonidis.2022)
+- what is the effect? 
+- what is the motivation?
+
+**Continuous Monitoring**
+- @Karamitsos.2020
+	- performance monitoring -> trigger pipeline
+	- reasons model, data drift
+	- resource monitoring
+	- resource utilization measuring throughput
+- @Subramanya.2022
+	- measure the vitals of the deployed pipeline
+	- retrigger training if required
+	- data drift, model performance
+- @Singla.2023
+	- model performance, 
+	- response time
+	- resource utilization
+- @Wang.2020
+	- ensure model correctness
+	- monitor: depended, data version, usage and model modification
+
+
+- @Bagai.2024
+	- track model performance: @Bagai.2024
+	- prediction accuracy @Bagai.2024
+	- data distribution @Bagai.2024
+	- interference latency @Bagai.2024
+
+- @Steidl.2023
+	- monitor data, model and system
+	- improve model over-time 
+	- collect input and output data -> future training, data drift detection
+	- model performance
+	- traditional key performance indicators
+		- response time, latency, throughput
+	- metrics for business outcome
+
+- @Liang.2024
+	- user feedback
+	- system logs 
+	- model performance
+
+-@Kolltveit.2022
+ - increase trust
+ - detect performance monitoring
+ - monitor: latency, throughput, disk utilization
+ - prediction logging
+ - use model accuracy for determination of new model
+ - KPIs of the project
+
+- @Symeonidis.2022
+	- data monitoring:
+		- outlier, drift detection
+	- model monitoring:
+		- measure performance
+
+- @Testi.2022
+	- model:
+		- performance drift -> new training iteration
+	- technical and business KPIs 
+	- trigger for retraining
+
+- @Warnett.2022 
+	- model performance monitoring -> trigger pipeline 
+
+- @Ruf.2021
+	- System Monitoring:
+		- Serving Latency
+		- Throughput
+		- Disk utilization
+		- System uptime 
+		- CPU / GPU usage
+		- Number of API calls
+	- Input Data Monitoring
+		- detect data and concept drift
+		- data schema
+		- data consistency 
+		- data quality
+		- data drift
+		- outliers 
+		- tranig serving skew 
+	- Model Performance Monitoring
+		- data change -> model performance degradation 
+		- model performance
+		- concept drift
+		- fairness
+		- output distribution
+
+**Collaboration**
+@John.2021
+	- collaboration between disciplines
+	- collaboration on data, model code?
+
+@Kreuzberger.2023
+	- work collaboratively on data, model and code
+	- as culture
+	- reduce domain silos
+
+@Karamitsos.2020
+	- DevOps principle increase collaboration in teams with different disciplines
+	- share code
+
+
+@Lwakatare.2020
+	- collaboration and communication between the different disciplines (data scientists, software engineers, quality assurance engineer, product owner)
+
+@Mboweni.2022
+	- collaboration 
+
+
+@Mäkinen.2021
+	- problem collaboration on project
+
+@Ruf.2021
+	- collaboration on model and other artifacts is complicated
+	- collaboration between devops and data scientists
+
+@Singla.2023
+	- collaboration in cross functional teams
+	- 
+
+@Wang.2020
+	- teams work together to build ml model
+
+**Workflow Orchestration**
+@Garg.2021
+- steps of machine learning experiments are orchestrated
+
+@Karamitsos.2020
+- laut Kreuzberger ja
+
+@Lwakatare.20202k
+- orchestration of deployment Pipeline
+
+@Steidl.2023
+- four stages:
+	- data handling
+	- model learning
+	- software development
+	- system operations
+- non linear -> feedback loops
+
+@Fowler.2019
+	- tie everything together data, model, deployment
+
+**Automation**
+Different automation levels are defined
+	- commonly starting with a manual script based approach
+	- some intermediate levels
+	- end level complete automation that allows continuous training and automatic ML pipeline deployment based on new ideas such as adapted model architecture / parameters 
+
+@GoogleCloud:
+- Manual Process
+	- script driven
+	- building and deploying ML models is manual
+	- no connection between ML and operations
+	- no frequent releases
+	- no CI
+	- no CD 
+	- no CM
+- ML pipeline automation:
+	- continuous training -> automate the ML pipeline
+	- continuous delivery of model prediction service
+	- deploy a pipeline not a model
+	- focus on new data and not new models ideas, as the developed ml pipeline is still deployed manually
+- CI/CD pipeline automation:
+	- rapid + reliable update of the pipeline in production
+	- 
+
+@Wang.2020
+- automation characterizes the maturity of the ML process (MLOps?)
+- three levels 
+	- manual:
+		- models manually checked
+		- continual training -> automatic retraining with new data
+	- CI/CD Pipeline Automation
+		- nicht beschrieben
+	- CI/CD Pipeline Automation with auto deployment
+		- nicht beschrieben
+
+
+@Garg.2021
+- three levels of MLOps -> based on GoogleCloud article
+
+@John.2021
+- MLOps Maturity Model with four levels
+- Automated Data Collection
+	- Manual processing of
+		- data
+		- model
+		- deployment
+		- manual process to automated data collection for (re)-training
+- Automated Model Deployment
+	- Manual deployment and monitoring
+	- autoamtend deployment of the retrained model
+- Semi-automated Model Monitoring
+	- manual monitoring
+	- semi-automated model monitoring
+- Fully-autoamted Model Monitoring
+	
+@Lwakatare.2020
+- five levels
+- Manual, Data Science-Driven Process
+	- notebooks
+	- no connection between development and operation
+- Standardized, Experimental - Operational Symmetry Process
+	- combine ML model development and operational processes
+- Automated, ML Workflow Process
+	- automated ML workflow steps
+- Integrated, Software Development and ML Workflow Processes
+	- ML component as COTS and version controlled
+- Automated and Fully Integrated CD and ML Workflow Process
+	- orchestration service for build, test and deploy ML pipelines
+	- system monitoring and data collection
+	- re-training based on new data and model parameters
+
+**Reproducibility**
+References: 
+	@Bagai.2024
+		- dependencies, configurations and settings 
+		- enable experiments to be created consistently
+	@John.2021
+		- reproducible
+	@Karamitsos.2020
+		- reproduce the same results at any time 
+	@Kreuzberger.2023
+		- reproduce ML experiment, obtain same results
+	@Liang.2024:
+		- repeatability 
+	@Singla.2023
+		- consistent results across various environments and data sets
+	@Testi.2022
+		- recreate results of the lab in production environment
+	@Ruf.2021: 
+		- reproducibility
+	@Wang.2020:
+		- reproducibility
+	@Warnett.2022
+		- reproducibility
+	@GoogleCloud:
+		- reproducibility
+	@Fowler.2019
+		- reproduce in other environments 
+	@Ramalingam.2023
+		- reproducible
+	@Visengeriyeva
+		- every phase should produce identical results given the same input
+
+
+**Versioining**
+References:
+	@Bagai.2024
+	- Model 
+	- Data
+	- Code
+	- Dependency
+	@John.2021
+		- data versioning
+		- code
+		- model
+	@Karamitsos.2020
+		- model registry 
+		- data versioning
+		- code versioning
+		- enables sharing code with collaborators
+		- share model with production team
+	@Kreuzberger.2023
+		- code
+		- data
+		- model
+	@Liang.2024:
+		- datasets
+		- model
+	@Lwaktae.2024
+		- model version
+		- dependencies
+	@Ruf.2021:
+		- data versioning
+		- model versioning
+		- code versioning 
+	@Singla.2023
+		- model versioning
+		- code versioning
+	@Steidel.2023
+		- model versioning with model dependencies
+		- dependencies:
+			- dataset 
+			- source code
+			- configuration files
+			- log files
+			- evaluation results
+		- data versioning:
+	@Testi.2022
+		- data versioning
+		- how datasets evolve
+		- how datasets impact model
+		- code
+		- model
+	@Wang.2020
+		- data
+		- code
+		- model
+	@Warnett.2022
+		- data versioning
+		- model version
+	@Zhou.2020
+		- data + model versioning
+		- code
+	@GoogleCloud:
+		- source controll
+		- model registry? Include version? 
+		- feature store? Include version?
+	@Fowler.2019
+		- code, model, data
+	@Ramalingam.2023
+		- data versioning
+		- model 
+		- code
+	@Visengeriyeva
+		- data 
+		- model 
+		- code
+
+
+**Metadata capture**
+
+- Model metadata:
+	- hardware usage
+	- hyperparameters @John.2021
+	- evaluation results
+	- inference latency
+- Dependencies metadata:
+	- code version
+	- data versions
+	- runtime 
+- Pipeline metdata:
+	- completion reports
+	- execution times
+	- 
+
+References: 
+	@Bagai.2024
+		- data distribution, inference latency 
+	@John.2021
+		- hyperparemeter information
+		- all information about the model
+	@Karamitsos.2020
+		- monitoring resources
+	@Kreuzberger.2023
+		- for each task in the ML pipeline
+		- Parameters, execution time
+	@Liang.2024
+		- parameter settings
+		- algorithm selection
+		- compare results
+	@Lwakatare.20202k
+		- track metadata about pipeline execution
+		- compare and examine pipeline runs
+	@Steidel.2023
+		- execution and deployment of AI models
+		- runtime metadata
+		- model location
+		- registration data
+		- information on start and end
+		- compare runs with metadata store
+			- properties of trained model
+			- dataset 
+			- Evaluation results
+			- execution records
+			- provenance of data objects
+	@Subramanya.2022
+		- experiment and training metadata: hardware metrics, code versions, hyper parameters, configuration files
+		- artifact metadata: dataset paths, model hashes, dataset preview,
+		- model metadata: model versions, hardware usage, data perforce 
+		- pipeline: 
+	@Testi.2022
+		- track all information about different experiments
+		- hyper parameters
+	@Warnett.2022
+		- metadata store:
+			- data + parameter
+			- understand how specific models were built
+			- 
+	@GoogleCloud:
+		- motivation: 
+			- data + artifact lineage
+			- reproducibility
+			- comparisons:
+		- components:
+			- pipeline + component version
+			- ...
+	@Flower.2019
+		- parmeter
+		- performance
+		- what model should be promoted to production
+		- Experiments Tracking
+	@Visengeriyeva
+		- experiment tracking
+
+
+
+
