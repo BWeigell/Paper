@@ -1,9 +1,9 @@
 # Methods
 
-Designing a holistic ML platform with MLOps capabilities requires identifying both general infrastructure and MLOps capabilities. To determine the general infrastructure capabilities, we analyzed the ML infrastructure architecture of major cloud platform providers. For the MLOps capabilities, we conducted a Multivocal Literature Review (MLR) to consider both formal and grey literature, as MLOps is a new emerging software engineering development paradigm. Both analyses are detailed in the following two sections. 
+Designing a holistic ML platform with MLOps capabilities requires identifying capabilities at both the infrastructure and platform layers, as well as MLOps-specific capabilities. To determine the infrastructure and platform capabilities, we analyzed the ML platform architecture of major cloud platform providers. For the MLOps capabilities, we conducted a Multivocal Literature Review (MLR) to consider both formal and grey literature, as MLOps is a new emerging software engineering development paradigm. Both analyses are detailed in the following two sections.  
 
 
-## Strategy for Identification of Infrastructure Capabilities
+## Strategy for Identification of  Capabilities
 
 To create an initial pool of possible relevant major cloud platform providers, we used the Gartner Magic Quadrant for Strategic Cloud Platform Services (SCPS) 2023. This report provides an overview of companies offering standardized, automated public cloud services that integrate infrastructure capabilities @Gartner.2023. Further examined were only companies that met the following two criteria: 
 
@@ -32,8 +32,43 @@ The details of all inclusion criteria are listed in Tables X, Y, and Z, respecti
 Hab dich lieb
 
 ### Platform Infrastructure Capabilities
-Based on big player we identified blbalba
-#### punkt 1
+Based on big player we identified
+
+Infrastructure
+
+- Compute Infrastructure:
+	- ML specific accelerators @Amazon, @Alibaba, @Google, @Oracle, @IBM
+	- general compute power @Amazon, @Alibaba, @Google, @Microsoft
+- Fast Storage Access
+- Network
+- Scalability
+
+#### Infrastructure
+
+##### Compute Infrastructure
+
+The compute infrastructure capability offers access to both general computing power and ML-specific accelerators such as graphics processing units (GPUs) and tensor processing units (TPUs) @Amazon, @Alibaba, @Google, @Microsoft, @IBM. Moreover, this includes the ability for distributed ML training @Amazon, @Oracle.  
+
+##### Storage
+The Storage capability enables high-speed access to local and distributed storage at the ML platform's infrastructure layer @IBM, @Oracle, @Mircosoft, @Google, @Amazon, @Alibaba. 
+
+##### Network
+The Network capability ensures secure and fast communication @Amazon, @Google, @Microsoft, @Oracle.
+
+##### Scalability
+The scalability capability, a meta capability, allows the aggregation of compute and storage resources to an arbitrarily large instance @Google, @Amazon, @Oracle.
+
+Platform
+
+- Encapsulation of compute environments (VMs, Container)
+	- usage of Containers or VMs to provided compute environments with clear defined resource limits and separations 
+- Orchestration 
+- Auto-Management
+- Scheduling
+- Support for common ML frameworks
+	- offering of pre-configured compute instances (VMs, Containers) 
+	- pre-installed dependencies for the usage of the compute resources in combination with ML framework e.g. CUDA Driver with PyTorch pre-installed
+
 
 - provision of:
 	- ML accelerators @Amazon, @Alibaba, @Google, @Oracle, @IBM
@@ -42,7 +77,7 @@ Based on big player we identified blbalba
 		- other optimized hardware
 	- storage @Amazon, @Alibaba, @Google, Microsoft, @Oracle, @IBM
 	- network @Amazon, @Alibaba, @Google, Microsoft, @Oracle, @IBM
-	- general compute power @Amazon, @Alibaba, @Google, Microsoft, @IBM
+	- general compute power @Amazon, @Alibaba, @Google, Microsoft
 - scalable @Amazon
 - support different ML frameworks @Amazon, @Alibaba, @IBM
 - distributed training @Amazon
