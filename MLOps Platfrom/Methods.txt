@@ -1,29 +1,57 @@
 # Methods
 
-Designing a holistic ML platform with MLOps capabilities requires identifying both general infrastructure capabilities and MLOps capabilities. To determine the general infrastructure capabilities, we analyzed the ML infrastructure architecture of major Cloud Platform providers. For the MLOps capabilities, we conducted a Multivocal Literature Review (MLR) based on  @Garousi.2019 to consider both grey and formal literature, as MLOps is a new emerging software engineering development paradigm. Both analyses are detailed in the following two sections. 
+Designing a holistic ML platform with MLOps capabilities requires identifying both general infrastructure and MLOps capabilities. To determine the general infrastructure capabilities, we analyzed the ML infrastructure architecture of major cloud platform providers. For the MLOps capabilities, we conducted a Multivocal Literature Review (MLR) to consider both formal and grey literature, as MLOps is a new emerging software engineering development paradigm. Both analyses are detailed in the following two sections. 
 
 
+## Strategy for Identification of Infrastructure Capabilities
 
-## Requirement Extraction
-MLOps is a new emerging software engineering development paradigm consisting of a set of best practices and principles that ensure the successful transition of ML artifacts from development to production @Kreuzberger.2023. These best practices and principles are tailored to overcome the challenges arising throughout the ML lifecycle. Hence, a platform fulfilling MLOps best practices and principles inherently supports the development, deployment, and maintenance of ML applications. Consequently, the requirements for the proposed ML platform are defined by and extracted from MLOps' best practices and principles. These MLOps best practices and principles were determined from formal and grey literature by conducting a Multivocal Literature Review (MLR) based on @Garousi.2019.
+To create an initial pool of possible relevant major cloud platform providers, we used the Gartner Magic Quadrant for Strategic Cloud Platform Services (SCPS) 2023. This report provides an overview of companies offering standardized, automated public cloud services that integrate infrastructure capabilities @Gartner.2023. Further examined were only companies that met the following two criteria: 
 
-The MLR was guided by the following research question (RQ):
+1. Located in the upper two third on both axis of the SCPS 2023
+2. Offer an ML infrastructure or comparable service
 
-/ RQ-0: What are published MLOps best practices and principles?
+Based on both criteria, we identified the following six companies: Amazon Web Services, Alibaba Cloud, Oracle, Google, IBM and Microsoft. 
 
-The search term ((("DevOps" OR "CICD" OR "Continuous Integration" OR "Continuous Delivery" OR "Continuous Deployment" OR "Continuous Learning") AND "Machine Learning") OR "MLOps" OR "CD4ML") was established to identify the corresponding grey and formal literature. The search was conducted in October 2023 using Google Scholar for formal literature and Google for grey literature, based on the assertion by @Yasin.2020 that combining results from Google Scholar and grey literature from Google yields a range of sources comparable to those obtained through searches in other databases like ACM Digital Library, IEEE, and ScienceDirect. As stopping criteria, the effort bound was set to the first 100 entries in Google Scholar for the formal literature and the first 40 entries from Google for the grey literature.
+## Strategy for Identification of MLOps Capabilities
+The MLOps capabilities were extracted from gray and formal literature by conducting an MLR based on @Garousi.2019. The MLR was guided by the following primary research question (RQ):
 
-Relevant sources were selected from the identified sources based on the following three groups of defined inclusion criteria:
+/ RQ-0: What are published best concepts, practices, and principles enabling MLOps?
+
+Therefore, the search term ((("DevOps" OR "CICD" OR "Continuous Integration" OR "Continuous Delivery" OR "Continuous Deployment" OR "Continuous Learning") AND "Machine Learning") OR "MLOps" OR "CD4ML") was established to identify the corresponding grey and formal literature. The search was conducted in October 2023 and in June 2023 using Google Scholar for formal literature and Google for grey literature, based on the results of @Yasin.2020 that combining results from Google Scholar and grey literature from Google yields a range of sources comparable to those obtained through searches in other databases like ACM Digital Library, IEEE, and ScienceDirect. As stopping criteria, the effort bound was set to the first 100 entries in Google Scholar for the formal literature and the first 40 entries from Google for the grey literature.
+
+Relevant sources were selected from the identified literature based on the following three groups of defined inclusion criteria:
 
 
 - General inclusion criteria: These must be fulfilled by both formal and grey literature.
 - Formal inclusion criteria: These apply only to formal literature.
 - Informal inclusion criteria: These are relevant only to grey literature.
 
-The details of all inclusion criteria are listed in Tables X, Y, and Z, respectively. Nine articles were selected from the formal group, and five web pages were chosen from the grey literature group based on the established inclusion criteria.
+The details of all inclusion criteria are listed in Tables X, Y, and Z, respectively. Based on the established inclusion criteria from the formal group, 20 articles were selected, and four web pages were chosen from the grey literature group.
 
+## Capabilities 
+Hab dich lieb
 
-## Resulting MLOps Principles
+### Platform Infrastructure Capabilities
+Based on big player we identified blbalba
+#### punkt 1
+
+- provision of:
+	- ML accelerators @Amazon, @Alibaba, @Google, @Oracle, @IBM
+		- TPU
+		- GPU
+		- other optimized hardware
+	- storage @Amazon, @Alibaba, @Google, Microsoft, @Oracle, @IBM
+	- network @Amazon, @Alibaba, @Google, Microsoft, @Oracle, @IBM
+	- general compute power @Amazon, @Alibaba, @Google, Microsoft, @IBM
+- scalable @Amazon
+- support different ML frameworks @Amazon, @Alibaba, @IBM
+- distributed training @Amazon
+- on-demand compute instances (Docker, VMs) @Amazon, @Alibaba, @Google, Microsoft
+- automated orchestration of jobs, scheduler @Google, Microsoft, @IBM
+- 
+- 
+
+### Resulting MLOps Principles
 Based on the MLR, the following groups of principles were identified: Continuous-X, Cross-Functional Development, Orchestration and Automation, and Traceability and Reproducibility. Notably, we could revalidate all principles defined by @Kreuzberger.2023 except for feedback loops. However, we refined CI/CD automation by dividing it into the separate principles of CI, CD, continuous deployment, and general automation. These individual principles were placed in the Continuous-X or Orchestration and Automation groups, according to @Visengeriyeva. Furthermore, we introduced a new principle, user friendliness, to increase the adaption of an MLOps platform. We also consolidated versioning and metadata capture with reproducibility under a new group, Traceability and Reproducibility, to focus more on traceability aspects. 
 
 ##### Continuous-X
