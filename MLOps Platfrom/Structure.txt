@@ -37,9 +37,17 @@
 
 
 **ML Platform and MLOps Capabilities**
+- ML Platform Capabilities
+- MLOps Capabilities
 
 **Concept:**
 	- Platform Design [[Platform Design]]
+		- Intro: 
+			- Platform wird in vier aufeinander aufbauende Layer unterteilt (Hardware, Infrastructure, Platform, Application)
+			- Haupt Interaction der Entwicklung und Deployments findet in Layer 4 statt -> bietet dem User die Möglichkeit ein Model zu entwickeln und deployen durch MLOps Capabilites
+			- zugrunde liegende Layer sind enabler für den Application  Layer und kümmern sich um die Bereitstellung und Verwaltung der notwendigen Ressourcen und machen es gegenüber den End-User transparent
+			- Buttom-Up Erklärung der Platform
+			- 
 	- Lifecycle
  
  **Results:**

@@ -1,9 +1,9 @@
 # Methods
 
-Designing a holistic ML platform with MLOps capabilities requires identifying capabilities at both the infrastructure and platform layers, as well as MLOps-specific capabilities. To determine the infrastructure and platform capabilities, we analyzed the ML platform architecture of major cloud platform providers. For the MLOps capabilities, we conducted a Multivocal Literature Review (MLR) to consider both formal and grey literature, as MLOps is a new emerging software engineering development paradigm. Both analyses are detailed in the following two sections.  
+Designing a holistic ML platform with MLOps capabilities requires identifying both general infrastructure and MLOps capabilities. To determine the general infrastructure capabilities, we analyzed the ML infrastructure architecture of major cloud platform providers. For the MLOps capabilities, we conducted a Multivocal Literature Review (MLR) to consider both formal and grey literature, as MLOps is a new emerging software engineering development paradigm. Both analyses are detailed in the following two sections.   
 
 
-## Strategy for Identification of  Capabilities
+##  Method for Identifying Infrastructure Capabilities
 
 To create an initial pool of possible relevant major cloud platform providers, we used the Gartner Magic Quadrant for Strategic Cloud Platform Services (SCPS) 2023. This report provides an overview of companies offering standardized, automated public cloud services that integrate infrastructure capabilities @Gartner.2023. Further examined were only companies that met the following two criteria: 
 
@@ -12,8 +12,8 @@ To create an initial pool of possible relevant major cloud platform providers, w
 
 Based on both criteria, we identified the following six companies: Amazon Web Services, Alibaba Cloud, Oracle, Google, IBM and Microsoft. 
 
-## Strategy for Identification of MLOps Capabilities
-The MLOps capabilities were extracted from gray and formal literature by conducting an MLR based on @Garousi.2019. The MLR was guided by the following primary research question (RQ):
+## Method for Identifying MLOps Capabilities
+The MLOps capabilities were extracted from grey and formal literature by conducting an MLR based on @Garousi.2019. The MLR was guided by the following primary research question (RQ):
 
 / RQ-0: What are published best concepts, practices, and principles enabling MLOps?
 
@@ -28,66 +28,35 @@ Relevant sources were selected from the identified literature based on the follo
 
 The details of all inclusion criteria are listed in Tables X, Y, and Z, respectively. Based on the established inclusion criteria from the formal group, 20 articles were selected, and four web pages were chosen from the grey literature group.
 
-## Capabilities 
-Hab dich lieb
+## ML Platform and MLOps Capabilities 
+Based on the described methodology, we identified the platform infrastructure and MLOps capabilities. The results for both are detailed in the following. Moreover, these identified capabilities build the foundation of the ML platform architecture.
 
 ### Platform Infrastructure Capabilities
-Based on big player we identified
-
-Infrastructure
-
-- Compute Infrastructure:
-	- ML specific accelerators @Amazon, @Alibaba, @Google, @Oracle, @IBM
-	- general compute power @Amazon, @Alibaba, @Google, @Microsoft
-- Fast Storage Access
-- Network
-- Scalability
-
-#### Infrastructure
-
-##### Compute Infrastructure
-
-The compute infrastructure capability offers access to both general computing power and ML-specific accelerators such as graphics processing units (GPUs) and tensor processing units (TPUs) @Amazon, @Alibaba, @Google, @Microsoft, @IBM. Moreover, this includes the ability for distributed ML training @Amazon, @Oracle.  
-
-##### Storage
-The Storage capability enables high-speed access to local and distributed storage at the ML platform's infrastructure layer @IBM, @Oracle, @Mircosoft, @Google, @Amazon, @Alibaba. 
-
-##### Network
-The Network capability ensures secure and fast communication @Amazon, @Google, @Microsoft, @Oracle.
-
-##### Scalability
-The scalability capability, a meta capability, allows the aggregation of compute and storage resources to an arbitrarily large instance @Google, @Amazon, @Oracle.
-
-Platform
-
-- Encapsulation of compute environments (VMs, Container)
-	- usage of Containers or VMs to provided compute environments with clear defined resource limits and separations 
-- Orchestration 
-- Auto-Management
-- Scheduling
-- Support for common ML frameworks
-	- offering of pre-configured compute instances (VMs, Containers) 
-	- pre-installed dependencies for the usage of the compute resources in combination with ML framework e.g. CUDA Driver with PyTorch pre-installed
+The analysis of the ML infrastructure offered by the six companies revealed five high level capabilities a ML platform should fulfill at the infrastructure layer. 
 
 
-- provision of:
-	- ML accelerators @Amazon, @Alibaba, @Google, @Oracle, @IBM
-		- TPU
-		- GPU
-		- other optimized hardware
-	- storage @Amazon, @Alibaba, @Google, Microsoft, @Oracle, @IBM
-	- network @Amazon, @Alibaba, @Google, Microsoft, @Oracle, @IBM
-	- general compute power @Amazon, @Alibaba, @Google, Microsoft
-- scalable @Amazon
-- support different ML frameworks @Amazon, @Alibaba, @IBM
-- distributed training @Amazon
-- on-demand compute instances (Docker, VMs) @Amazon, @Alibaba, @Google, Microsoft
-- automated orchestration of jobs, scheduler @Google, Microsoft, @IBM
-- 
-- 
+#### Computation Infrastructure (CB-1)
+The Computation Infrastructure capability offers access to both general computing power and ML-specific accelerators such as graphics processing units (GPUs) and tensor processing units (TPUs) @Amazon, @Alibaba, @Google, @Microsoft, @IBM. Moreover, this includes the ability for distributed ML training @Amazon, @Oracle.  
 
-### Resulting MLOps Principles
-Based on the MLR, the following groups of principles were identified: Continuous-X, Cross-Functional Development, Orchestration and Automation, and Traceability and Reproducibility. Notably, we could revalidate all principles defined by @Kreuzberger.2023 except for feedback loops. However, we refined CI/CD automation by dividing it into the separate principles of CI, CD, continuous deployment, and general automation. These individual principles were placed in the Continuous-X or Orchestration and Automation groups, according to @Visengeriyeva. Furthermore, we introduced a new principle, user friendliness, to increase the adaption of an MLOps platform. We also consolidated versioning and metadata capture with reproducibility under a new group, Traceability and Reproducibility, to focus more on traceability aspects. 
+TODO: add RAM 
+
+#### Storage (CB-2)
+The Storage capability enables high-speed access to persistent local and distributed storage at the ML platform's infrastructure layer @IBM, @Oracle, @Mircosoft, @Google, @Amazon, @Alibaba. 
+
+#### Network (CB-3)
+The Network capability ensures secure and efficient communication with external and between internal resources of the ML platform. @Amazon, @Google, @Microsoft, @Oracle.
+
+#### Scalability (CB-4)
+The Scalability capability, a meta capability, allows the aggregation of compute and storage resources to an arbitrarily large instance @Google, @Amazon, @Oracle.
+
+#### Encapsulation of Computation Environments (CB-5)
+Encapsulation of Computation Environments capability enables the creation of separated, independent, and resource-limited compute environments (e.g., VMs, containers) @Google, @Amazon, @Mircrosoft, @IBM. 
+
+#### On-demand Workspaces (CB-6)
+
+
+### MLOps Capabilities
+Based on the MLR, the following groups of capabilities were identified: Continuous-X, Cross-Functional Development, Orchestration and Automation, and Traceability and Reproducibility. Notably, we could revalidate all principles defined by @Kreuzberger.2023 except for feedback loops. However, we refined CI/CD automation by dividing it into the separate capabilities of CI, CD, continuous deployment, and general automation. These individual capabilities were placed in the Continuous-X or Orchestration and Automation groups, according to @Visengeriyeva. Furthermore, we introduced a new capability, user friendliness, to increase the adaption of an MLOps platform. We also consolidated versioning and metadata capture with reproducibility under a new group, Traceability and Reproducibility, to focus more on traceability aspects. 
 
 ##### Continuous-X
 
@@ -120,7 +89,7 @@ By continuously monitoring these aspects, CM can timely detect various issues af
 
 #### Cross-Functional Development 
 
-In ML projects different stakeholders are involved in the development such as data scientists, software engineers, and product owners @Ruf.2021, @Kreuzberger.2023. The principles Collaboration and User Friendliness aim to facilitate the development process between the stakeholders. 
+In ML projects different stakeholders are involved in the development such as data scientists, software engineers, and product owners @Ruf.2021, @Kreuzberger.2023. The capabilities Collaboration and User Friendliness aim to facilitate the development process between the stakeholders. 
 
 **Collaboration**
 Collaboration ensures that all involved stakeholders can work together without knowledge silos @John.2021, @Kreuzberger.2023, @Karamitsos.2020, @Lwakatare.20202k,  @Ruf.2021, @Singla.2023, @Wang.2020, @Fowler.2019, @Ramalingam.2023, @Visengeriyeva. However, collaboration in ML projects is more challenging as it requires cooperation not only on code but also on data and artifacts like models @Mäkinen.2021, @Ruf.2021.
@@ -140,7 +109,7 @@ The typical ML pipeline involves several stages: data extraction, data validatio
 Automation characterizes the maturity of the MLOps workflow and specifies its ability to autonomously deploy the ML pipeline, re-execute the ML pipeline based on new data and serve the final model @Wang.2020, @Lwakatare.20202k, @John.2021, @Garg.2021, @GoogleCloud. In the literature, several maturity models exist that describe the level of automation in MLOps with varying degrees of granularity. Commonly, these models start with a manual, script-based approach and result in a fully automated process that enables continuous training and automatic ML pipeline deployment based on new ideas such as customized model architecture and parameters @GoogleCloud, @Lwakatare.20202k, @John.2021, @Garg.2021.
 
 #### Traceability and Reproducibility
-Seven key requirements must be fulfilled to build trustworthy AI systems @EuropeanCommission.2019. One of these requirements is transparency, which depends on the concept of traceability. Traceability involves documenting data, processes, and decisions, enabling transparency, auditability, explainability, error identification, and prevention @EuropeanCommission.2019. MLOps includes versioning and metadata tracking principles, thus directly improving traceability @Kreuzberger.2023, @Zhou.2020 (@Bagai.2024, @John.2021, @Karamitsos.2020, @Liang.2024, @Warnett.2022). Moreover, traceability is an enabler for reproducible ML experiments. 
+Seven key requirements must be fulfilled to build trustworthy AI systems @EuropeanCommission.2019. One of these requirements is transparency, which depends on the concept of traceability. Traceability involves documenting data, processes, and decisions, enabling transparency, auditability, explainability, error identification, and prevention @EuropeanCommission.2019. MLOps includes versioning and metadata tracking capabilities, thus directly improving traceability @Kreuzberger.2023, @Zhou.2020 (@Bagai.2024, @John.2021, @Karamitsos.2020, @Liang.2024, @Warnett.2022). Moreover, traceability is an enabler for reproducible ML experiments. 
 
 **Versioning**
 In MLOps versioning affects code, data and model artifacts @Bagai.2024, @John.2021, @Karamitsos.2020, @Kreuzberger.2023, @Ruf.2021, @Steidl.2023, @Testi.2022, @Wang.2020, @Zhou.2020, @Fowler.2019, @Ramalingam.2023, @Visengeriyeva. However, versioning should also consider the runtime environment, such as docker containers. 
