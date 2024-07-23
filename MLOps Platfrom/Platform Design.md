@@ -2,10 +2,10 @@
 
 Gliederung: 
 	- [x] Intro 
-	- [ ] Reference Architecture
+	- [x] Reference Architecture
 		- [x] Hardware Layer
 		- [x] Infrastructure Layer
-		- [ ] Plattform Layer
+		- [x] Plattform Layer
 	- [ ] User-Zone
 	- [ ] Interactions	
 
@@ -16,6 +16,9 @@ Based on the identified general ML platform and MLOps capabilities, we propose a
 TODO: 
 	- include workflow agnostic
 	- can be integrated at every point in the development 
+
+Three layer architecture
+
 
 ## Reference Architecture
 
@@ -73,11 +76,11 @@ Structure:
 - include model training and serving infrastructure
 - maybe better to speak about realizing a principle?
 
-The platform layer forms the heart of the MLOps platform. It hides the underlying complexity of the hardware and infrastructure layer, realizes all MLOps capabilities from CB-6 to CB-17, and thus supports teams during the entire ML lifecycle.
+The platform layer forms the core of the MLOps platform. It abstracts the underlying complexity of the hardware and infrastructure layer, realizes all MLOps capabilities from CB-6 to CB-17, and thus supports teams during the entire ML lifecycle.
 
-Based on the MLOps capabilities CB-6 to CB-17 we derived ten components. The components and the principles from which they were deduced are listed in Table x and are also displayed in the reference architecture in Figure x. 
+We derived ten components based on the MLOps capabilities CB-6 to CB-17. The components and the capabilities from which they were deduced are listed in Table X and displayed in the reference architecture in Figure X. 
 
-The derived components are grouped into the three groups Artifact Management, Automation, and User Management based on their primary use.
+The derived components are categorized into three groups based on their primary use: artifact management, automation, and user management.
 
 #### Artifact Storage
 
@@ -103,10 +106,7 @@ To completely comply with the versioning capability (CB-15) and increase reprodu
 
 The metadata store mainly results from the metadata capture capability (CB-16). Hence, it must support capturing the defined metadata categories: model, dependency, and pipeline metadata. To realize the dependency metadata category, which is responsible for establishing a full model lineage, the metadata store must interact with the SCM, Data Store, Model Registry, and Image Registry. This interaction can occur directly with each component or through a chained approach. In the chained approach, the Metadata Store links to the first component, which then links to one of the remaining components. For example, the metadata store could link its captured metadata only to the responsible code version at the SCM. The source code then links to the used image and dataset and the resulting model, which also enhances reproducibility (CB-17).
 
-Additionally, the metadata store is required to improve collaboration (CB-11) and enable CM (CB-10). The metadata store reduces knowledge silos about model dependency, pipeline, and general model metadata by providing this information at a central location. CM uses the stored information about the model and the pipeline in the Metadata Store to compare the deployed model with its captured parameters about the same model to detect changes like higher inference latency or reduced model performance. 
-
-
-
+Additionally, the metadata store is required to improve collaboration (CB-11) and enable CM (CB-10). The metadata store reduces knowledge silos about model dependency, pipeline, and general model metadata by providing this information at a central location. CM uses the stored information about the model and the pipeline in the Metadata Store to compare the deployed model with its previously captured parameters during training to detect changes like higher inference latency or reduced model performance. 
 
 Artifact Manangement
 
@@ -117,14 +117,48 @@ Artifact Manangement
 - Image Registry CB-11, CB-15, CB-17
 
 
+#### Automation
+This group's essential task is to increase the overall level of automation (CB-14) through CI, CD, Monitoring, and Image Builder components. 
+
+##### CI
+The CI component is primarily needed to perform integration tests (CB-6). Beyond that, it also encourages collaboration (CB-14) as team members more frequently merge code changes into a shared repository. Consequently, each team member receives feedback about the project's current status through the test results.  
+
+- Perform integration tests (CB-6) 
+- Collaboration (CB-11)
+	- every team member receives feedback
+- increases automation (CB-14)
+
+##### CD
+A continuous delivery component is introduced to realize CD (CB-7) and Continuous Deployment (CB-8). This component performs and orchestrates the deployment process, and is essential for achieving a high automation level (CB-14).
+
+- orchestrate deployment process (CB-7, CB-8)
+- increases automation CB-14
+
+##### Monitoring System
+The capability of continuous monitoring (CB-10) requires the implementation of a Monitoring System. This system gathers data such as predictions and incoming data distribution from the deployed model and compares them to the data stored in the Metadata Store. In case the Monitoring System detects an anomaly like data drift or model degradation, it can automatically re-trigger the deployed training pipeline (CB-14).  
+
+- Continuous Monitoring (CM-10)
+- Automation (CB-14)
+	- enabler to trigger deployed pipeline
+
+##### Image Builder 
+Every task on the platform must be executed inside a runtime environment, which is instantiated from an image. Therefore, to instantiate a runtime environment, the image must be created automatically (CB-14). The Image Builder handles this automation by creating the final image from a manifest and storing it for consumption and versioning in the Image Registry. Additionally, to comply with Versioning (CB-15) and enhance reproducibility (CB-17), the manifest describing the image should be tracked in the SCM. (vielleicht raus lassen, könnte verwirren, wieso es jetzt im SCM getrackt werden soll)
+
 Automation
 - CI
 - CD / Continuous Deployment
 - Monitoring System
 - Image Builder
 
-User Management
-- Identity Provider
+#### User Management
+In an ML project, several people work together and use the components of the ML platform. Therefore, to allow a user to own their private data but also share it and thereby decrease isolated knowledge (CB-11), an identity provider is needed. The Identity Provider authenticates each user and assigns them a unique ID. This ID can then be used by different components to authorize the user and allow them to share specific resources with others.
+
+To enhance collaboration a user should be able to cd
+- multiple users 
+- user has own data
+- possible to share data with specific other users like team members to reduce knowledge silos
+- requires identity provider that assigns each user an unique id and handles authentication 
+Identity Provider -> Collaboration
 
 | Principles | Components |
 |:--|:--|
@@ -139,46 +173,8 @@ User Management
 | Image Registry | Automation, Versioning|
 
 
-In the following we shortly explain the task of each component  and their interaction with other components to realize the components associated capabilities. 
 
 - link artifacts for reproducibility -> add this to interaction paradigms
-
-Componente | Principles
-
-CPU | Computation Infrastructure
-
-ML Accelerator | Computation Infrastructure
-ML Accelerator Interface | Computation Infrastructure
-
-Storage | Computation Infrastructure
-Storage Interface | Computation Infrastructure
-
-Network | Computation Infrastructure
-Network Configuration | Configuration Infrastructure
-
-Virtualization | Encapsulation of Computation Environments
-
-- CI | CI, Automation
-- CD | CD, Automation
-- Continuous Deployment | Continuous Deployment, Automation
-- Continuous Monitoring | Continuous Monitoring, Automation
-- Monitoring System | Continuous Monitoring
-- Continuous Training | Continuous Training, Automation
-
-- Identity Provider | Collaboration
-
-- Pipeline Orchestrator | ML Pipeline Orchestration
-- Container Builder | Automation
-
-- Data Store | Versioning
-- Feature Store | Versioning
-- SCM | Versioining
-- Container Registry | Versioning
-
-- Metadata Store | Metadata Capture
-
-- Client | Collaboration
-- 
 
 
 ## User Zone
