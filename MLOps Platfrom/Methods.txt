@@ -29,16 +29,14 @@ Relevant sources were selected from the identified literature based on the follo
 The details of all inclusion criteria are listed in Tables X, Y, and Z, respectively. Based on the established inclusion criteria from the formal group, 20 articles were selected, and four web pages were chosen from the grey literature group.
 
 ## ML Platform and MLOps Capabilities 
-Based on the described methodology, we identified the platform infrastructure and MLOps capabilities. The results for both are detailed in the following. Moreover, these identified capabilities build the foundation of the ML platform architecture.
+Based on the described methodology, we identified general platform and MLOps capabilities. The results for both are detailed in the following. Moreover, these identified capabilities build the foundation of the ML platform architecture.
 
-### Platform Infrastructure Capabilities
-The analysis of the ML infrastructure offered by the six companies revealed five high level capabilities a ML platform should fulfill at the infrastructure layer. 
+### General Platform Capabilities
+The analysis of the ML infrastructure offered by the six companies revealed six high level capabilities a ML platform should fulfill. 
 
 
 #### Computation Infrastructure (CB-1)
-The Computation Infrastructure capability offers access to both general computing power and ML-specific accelerators such as graphics processing units (GPUs) and tensor processing units (TPUs) @Amazon, @Alibaba, @Google, @Microsoft, @IBM. Moreover, this includes the ability for distributed ML training @Amazon, @Oracle.  
-
-TODO: add RAM 
+The Computation Infrastructure capability offers access to both general computing power including RAM and ML-specific accelerators such as graphics processing units (GPUs) and tensor processing units (TPUs) @Amazon, @Alibaba, @Google, @Microsoft, @IBM. Moreover, this includes the ability for distributed ML training @Amazon, @Oracle.  
 
 #### Storage (CB-2)
 The Storage capability enables high-speed access to persistent local and distributed storage at the ML platform's infrastructure layer @IBM, @Oracle, @Mircosoft, @Google, @Amazon, @Alibaba. 
@@ -50,11 +48,15 @@ The Network capability ensures secure and efficient communication with external 
 The Scalability capability, a meta capability, allows the aggregation of compute and storage resources to an arbitrarily large instance @Google, @Amazon, @Oracle.
 
 #### Encapsulation of Computation Environments (CB-5)
-Encapsulation of Computation Environments capability enables the creation of separated, independent, and resource-limited compute environments (e.g., VMs, containers) @Google, @Amazon, @Mircrosoft, @IBM. 
+The Encapsulation of Computation Environments capability enables the creation of separated, independent, and resource-limited computation environments (e.g., VMs, containers) @Google, @Amazon, @Mircrosoft, @IBM. 
+
+
+#### On-demand Provisioning of Computation Environments
+This capability enables developers to dynamically create computation environments with specific resource allocations for development @Google, @Amazon.
 
 
 ### MLOps Capabilities
-Based on the MLR, the following groups of capabilities were identified: Continuous-X, Cross-Functional Development, Orchestration and Automation, and Traceability and Reproducibility. Notably, we could revalidate all principles defined by @Kreuzberger.2023 except for feedback loops. However, we refined CI/CD automation by dividing it into the separate capabilities of CI, CD, continuous deployment, and general automation. These individual capabilities were placed in the Continuous-X or Orchestration and Automation groups, according to @Visengeriyeva. Furthermore, we introduced a new capability, user friendliness, to increase the adaption of an MLOps platform. We also consolidated versioning and metadata capture with reproducibility under a new group, Traceability and Reproducibility, to focus more on traceability aspects. 
+Based on the MLR, the following groups of capabilities were identified: Continuous-X, Cross-Functional Development, Orchestration and Automation, and Traceability and Reproducibility. Notably, we were able to revalidate all principles defined by @Kreuzberger.2023 except for feedback loops. However, we refined CI/CD automation by dividing it into the separate capabilities of CI, CD, continuous deployment, and general automation. These individual capabilities were placed in the Continuous-X or Orchestration and Automation groups, according to @Visengeriyeva. Furthermore, we introduced a new capability, User Friendliness, to increase the adaption of an MLOps platform. We also consolidated Versioning, Metadata Capture, and Reproducibility under a new group, Traceability and Reproducibility, to focus more on traceability aspects. 
 
 ##### Continuous-X
 

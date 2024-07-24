@@ -6,62 +6,36 @@ Gliederung:
 		- [x] Hardware Layer
 		- [x] Infrastructure Layer
 		- [x] Plattform Layer
-	- [ ] User-Zone
+	- [x] User-Zone
 	- [ ] Interactions	
+
+**TODO**: 
+	- [ ] Komponenten beim ersten Auftreten kursiv schreiben?
+	- [ ] alle Komponenten immer groß schreiben?
 
 ## Intro: 
 
-Based on the identified general ML platform and MLOps capabilities, we propose a reference architecture for a holistic ML platform. This platform is designed as a Platform-as-a-Service (PaaS) solution implementing MLOps capabilities to support the entire lifecycle of ML models, including experimentation, deployment, monitoring, and retraining. The architecture of the PaaS is not able to capture alone all MLOps capabilities, as some require the interaction of several components. Therefore, we first introduce the reference architecture followed by the interaction paradigms to fully realize all MLOps capabilities.  
+Based on the identified general ML platform and MLOps capabilities, we propose a reference architecture for a holistic ML platform. This platform is designed as a three-layer architecture that implements both types of capabilities to support teams during the entire lifecycle of ML models, including experimentation, deployment, monitoring, and retraining. The architecture alone cannot capture all MLOps capabilities, as some require the interaction of several components. Therefore, we first introduce the three-layer architecture of the ML Platform followed by interaction paradigms to fully realize all MLOps capabilities. 
 
-TODO: 
-	- include workflow agnostic
-	- can be integrated at every point in the development 
+## Three-Layer Architecture
 
-Three layer architecture
-
-
-## Reference Architecture
-
-3 layer Idee, welt nicht neu erfinden, auch bei dem PaaS auf etwas aufsetzten, was die Orchestrierung, Scheduling, Routing auf der Platform übernimmt, wie zum Beispiel ein Container Orchestration Framework
-
-- Platform wird als PaaS angesehen, hat dennoch Anforderungen an die zugrunde liegenden Layer
-- drei aufeinander aufbauende Layer unterteilt (Hardware, Infrastructure, Platform)
-- Haupt Interaction der Entwicklung und Deployments findet in Layer 3 statt -> bietet dem User die Möglichkeit ein Model zu entwickeln und deployen durch MLOps Capabilites
-- zugrunde liegende Layer sind enabler für den Application  Layer und kümmern sich um die Bereitstellung und Verwaltung der notwendigen Ressourcen und machen es gegenüber den End-User transparent
-- Buttom-Up Erklärung der Platform
-- kurze Erklärung der jeweiligen Layer 
-- die Komponenten die pro Layer existieren um die Capabilities umzusetzten
-- pro Layer lassen sich nicht alle Capailities mit einer einzelnen Komponente umsetzten -> Einführung von „Interactions“, die eine Capability umsetzt, die mehrere Schritte benötigt oder von anderen Komponenten abhängig ist
-- interactions sollen es auch workflow agnostic machen 
+The architecture from bottom to top consists of three layers: Hardware, Infrastructure, and Platform. Each lower layer abstracts the details from the higher layer and addresses its specific task, realizing some of the previously identified capabilities. The final architecture is visualized in Figure X. In the following sections, each layer is described in detail, examining its specific task and how it realizes the previously identified capabilities. 
 
 ### Hardware Layer
-- contains the hardware 
-- CPU, ML Accelerators (Computation Infrastructure)
-- Storage (Storage)
-- Network (Network)
-- RAM (Computation Infrastructure)
-
-This layer is located at the lowest level of the layer model and provides the physical resources to the higher layers. For the ML platform, this layer includes CPU, ML accelerators, storage and network devices (CB-1, CB-2, CB-3) and thereby building the foundation for the ML platform.  
+This layer is located at the lowest level of the layer model and provides the physical resources to the higher layers. For the ML platform, this layer includes CPU, RAM, ML accelerators, storage, and network devices (CB-1, CB-2, CB-3), thereby building the foundation for the ML platform.  
 
 ### Infrastructure Layer
-**TODO**: 
-	- Komponenten beim ersten Auftreten kursiv schreiben?
-	- alle Komponenten immer groß schreiben?
-
 This layer builds the bridge between the hardware and platform layers by abstracting the utilization of the physical resources and providing a standardized interface to the platform layer for efficient workload deployment. Therefore, the infrastructure layer must support the previously extracted capabilities (CB-3, CB-4, CB-5):
 
-In the reference architecture, each capability is realized either directly with a component or requires the introduction of multiple components. The following section derives these components from the capabilities and briefly describes them in the ML platform infrastructure layer context. 
+(In the reference architecture, each capability is realized either directly with a component or requires the introduction of multiple components. The following section derives these components from the capabilities and briefly describes them in the ML platform infrastructure layer context.) 
 
-The infrastructure layer achieves resource pooling (CB-4) by logically combining the hardware resources' computing, storage, and network capabilities in a cluster. Each physical server builds a node in the established cluster. Moreover, virtualization is used to realize the encapsulation of runtime environments (CB-5). Virtualization allows the placement of several workloads on a single node while ensuring that these workloads are separated from each other and have clear resource constraints. The multi-tenancy support offered by virtualization makes it necessary to introduce a resource scheduler to optimize workload placement and maximum throughput of workloads. This scheduler assigns each workload to the most suitable node in the cluster based on the workload's resource requirements and the node's current capacity. A monitoring component continuously tracks each node's resource capacity to achieve this scheduling. Furthermore, as virtualization makes the workloads independent from the underlying hardware, a cluster state watcher is introduced to reallocate workloads to a different node if their current assigned node becomes unavailable, thus guaranteeing high availability.
+The infrastructure layer achieves resource pooling (CB-4) by logically combining the hardware resources' computing, storage, and network capabilities in a *Cluster*. Each physical server builds a *Node* in the established Cluster. Moreover, *Virtualization* is used to realize the encapsulation of runtime environments (CB-5). Virtualization allows the placement of several workloads on a single node while ensuring that these workloads are separated from each other and have clear resource constraints. The multi-tenancy support offered by virtualization makes it necessary to introduce a *Resource Scheduler* to optimize workload placement and maximum throughput of workloads. This scheduler assigns each workload to the most suitable node in the cluster based on the workload's resource requirements and the node's current capacity. A *Monitoring Component* continuously tracks each node's resource capacity to achieve this scheduling. Furthermore, as virtualization makes the workloads independent from the underlying hardware, a *Cluster State Watcher* is introduced to reallocate workloads to a different node if their current assigned node becomes unavailable, thus guaranteeing high availability.
 
-To realize the network capability (CB-3), and as the previously introduced components rely on communication with each other, a network manager creates and manages a virtual network within the cluster. Moreover, the network manager connects the virtual network with outside networks and makes workloads addressable. This allows workloads to communicate with each other and be accessible from outside the cluster.  
+To realize the network capability (CB-3), and as the previously introduced components rely on communication with each other, a *Network Manager* creates and manages a virtual network within the cluster. Moreover, the network manager connects the virtual network with outside networks and makes workloads addressable. This allows workloads to communicate with each other and be accessible from outside the cluster.  
 
-Lastly, we introduce a single management endpoint that abstracts the complexity of the underlying infrastructure. This endpoints allows to manage and deploy workloads but also to configure and monitor the underling cluster. 
+Lastly, we introduce a single *Management Endpoint* that abstracts the complexity of the underlying infrastructure. This endpoints allows to manage and deploy workloads but also to configure and monitor the underling cluster. 
 
-
-These required functionalities can be realized through various components and technologies, such as container orchestration systems and virtualization platforms. 
-
-
+ 
 
 ### Platform Layer 
 Structure:
@@ -74,13 +48,12 @@ Structure:
 
 
 - include model training and serving infrastructure
-- maybe better to speak about realizing a principle?
 
 The platform layer forms the core of the MLOps platform. It abstracts the underlying complexity of the hardware and infrastructure layer, realizes all MLOps capabilities from CB-6 to CB-17, and thus supports teams during the entire ML lifecycle.
 
-We derived ten components based on the MLOps capabilities CB-6 to CB-17. The components and the capabilities from which they were deduced are listed in Table X and displayed in the reference architecture in Figure X. 
+We derived n components based on the MLOps capabilities, which are summarized along with their corresponding capabilities in Table X.
 
-The derived components are categorized into three groups based on their primary use: artifact management, automation, and user management.
+The derived components are categorized into four groups based on their primary use: artifact management, automation, user management, and development and deployment zones.
 
 #### Artifact Storage
 
@@ -142,23 +115,34 @@ The capability of continuous monitoring (CB-10) requires the implementation of a
 	- enabler to trigger deployed pipeline
 
 ##### Image Builder 
-Every task on the platform must be executed inside a runtime environment, which is instantiated from an image. Therefore, to instantiate a runtime environment, the image must be created automatically (CB-14). The Image Builder handles this automation by creating the final image from a manifest and storing it for consumption and versioning in the Image Registry. Additionally, to comply with Versioning (CB-15) and enhance reproducibility (CB-17), the manifest describing the image should be tracked in the SCM. (vielleicht raus lassen, könnte verwirren, wieso es jetzt im SCM getrackt werden soll)
-
-Automation
-- CI
-- CD / Continuous Deployment
-- Monitoring System
-- Image Builder
+Every task on the platform must be executed inside a runtime environment, which is instantiated from an image. Therefore, to instantiate a runtime environment, the image must be created automatically (CB-14). The Image Builder handles this automation by creating the final image from a manifest and storing it for consumption and versioning in the Image Registry. Additionally, to comply with Versioning (CB-15) and enhance Reproducibility (CB-17), the manifest describing the image should be tracked in the SCM. 
 
 #### User Management
 In an ML project, several people work together and use the components of the ML platform. Therefore, to allow a user to own their private data but also share it and thereby decrease isolated knowledge (CB-11), an identity provider is needed. The Identity Provider authenticates each user and assigns them a unique ID. This ID can then be used by different components to authorize the user and allow them to share specific resources with others.
 
-To enhance collaboration a user should be able to cd
-- multiple users 
-- user has own data
-- possible to share data with specific other users like team members to reduce knowledge silos
-- requires identity provider that assigns each user an unique id and handles authentication 
-Identity Provider -> Collaboration
+
+#### Zone Management
+CD (CB-7) and Continuous Deployment (CB-9) rely on deploying the final artifact, the ML pipeline or ML model, to a dedicated production environment. Additionally, a dedicated development environment is required to allow testing of the ML pipeline and provide developers with computation environments on demand for development (CB-5+). 
+
+In order to realize both the production and development environment, a Zone Manager is introduced. The Zone Manager creates, administers, and deletes zones. A zone encapsulates several computation environments, separating them from one another, and guarantees and restricts the total resource usage of the computation environments within the zone. For instance, a zone with a resource limit of 100 GB RAM usage restricts the total resource consumption of all execution environments in the zone to be below 100 GB for the RAM usage. Overall, two types of zones can be created: Development Zones and Deployment Zones.
+
+Development Zones: These zones are characterized by two properties. Firstly, a development zone is bound to a single developer. Secondly, the zone is resource limited, so that a single developer cannot accidentally consume all available resources. Consequently, a developer can create as many computation environments as required until the zone’s resource limit is reached. 
+
+Deployment Zones: In contrast to the Development Zones, the Deployment Zones are bound to a ML project and have both a resource guarantees and limits. Thus, the production computation environments achieve high availability through the resource guarantees, but also resource limits to avoid starving other environments.  
+
+
+
+#### Development Zone
+
+- developer has a dedicated zone with resource assertions in which they can:
+	- test deploy a ML pipeline
+	- create runtime environments for development
+	- utilize all components of the platform and use provided hardware 
+ 
+
+#### Deployment Zone
+In order to deploy the ML pipeline and serve the final trained model, a dedicated Deployment Zone is required by the CD process (CB-7, CB-8). While the Deployment Zone offers the same capabilities as the rest of the platform, it ensures that a defined minimum number of resources are available to guarantee the availability of the deployment for the runtime environments executed within this zone.  
+
 
 | Principles | Components |
 |:--|:--|
@@ -185,6 +169,9 @@ Identity Provider -> Collaboration
 
 - not directly derived from the principles, but from the overall goal to create a holistic ML platform, we introduced a development zone. The development zone offers platform users, an environment to experiment and test ML models using the underling and the offered components. 
 
+TODO: 
+	- include workflow agnostic -> later 
+	- can be integrated at every point in the development -> later
 
 
 
